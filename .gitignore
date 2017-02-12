@@ -1,0 +1,19 @@
+#Eclipse gitignore
+
+#Generated VM files
+*.dex
+
+#Java class files
+*.class
+
+#Generated file folders
+bin/
+gen/
+
+#Local config files
+local.properties
+
+#Eclipse project files
+.project
+.metadata
+
