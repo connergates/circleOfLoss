@@ -14,6 +14,5 @@ gen/
 local.properties
 
 #Eclipse project files
-.project
 .metadata
 
