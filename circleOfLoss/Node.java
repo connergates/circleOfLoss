@@ -5,7 +5,7 @@ import java.util.Comparator;
 
 public class Node implements Comparator<Node> {
 	private int teamNumber;
-	private ArrayList<Integer> beaten; 
+	private ArrayList<Integer> beaten = new ArrayList<Integer>(); 
 
 	public int getTeamNumber() {
 		return teamNumber;
