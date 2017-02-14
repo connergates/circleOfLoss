@@ -7,7 +7,7 @@ public class Node implements Comparator<Node> {
 	private int teamNumber;
 	private ArrayList<Integer> beaten = new ArrayList<Integer>(); 
 
-	Node(int teamNum)
+	public Node(int teamNum)
 	{
 		teamNumber = teamNum;
 	}
