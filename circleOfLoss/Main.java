@@ -9,28 +9,31 @@ public class Main {
 	public static void main(String args[])
 	{
 		System.out.println("Hello World");
-		importTeams();
+		
+		ArrayList<Node> teamRecords =  new ArrayList<Node>();
+		
+		teamRecords = importTeams();
+		
 	}
 	
 	
 	//ArrayList<ArrayList<Integer>>
-	public static void	importTeams()
+	public static ArrayList<Node>	importTeams()
 	{	
+		//NEED TO CHECK FOR THIS NUMBER 
+		int numTeams = 351;
+		ArrayList<Node> teamRecords =  new ArrayList<Node>(numTeams);
 		try{
 			String directory = System.getProperty("user.dir");
 			File textFile = new File(directory + "/" + "2016_GamesV2.txt");
 			
-			//NEED TO CHECK FOR THIS NUMBER 
-			int numTeams = 351;
-			
-			ArrayList<Node> teamRecords =  new ArrayList<Node>(numTeams);
 
 			Scanner sc = new Scanner(textFile);
 			
 			//NEED WAY TO CHECK NUM OF LINES IN TXT FILE
 			int numLines = 5516;
 			int i = 1;
-			while (i < numLines) { 
+			while (i <= numLines) { 
 			
 				String readLine = sc.nextLine();
 				String[] stringArray = readLine.split(",");
@@ -38,14 +41,22 @@ public class Main {
 				Integer wTeamNumber = Integer.parseInt(stringArray[2].trim()) - 1;
 				Integer lTeamNumber = Integer.parseInt(stringArray[5].trim()) - 1;
 			
-				if (teamRecords.get(wTeamNumber) == null) {
+				int teamIndex = teamRecords.indexOf(new Node(wTeamNumber));
+				
+				if (teamIndex >= 0) { //If team exists
+					// add new team to the beaten of the given index	
+					if (teamRecords.get(teamIndex).beaten.contains(lTeamNumber)) { 
+						
+					} else { 
+						teamRecords.get(teamIndex).addToBeaten(lTeamNumber);	
+					}
+				
+				} else {
+					
 					Node winningTeam = new Node(wTeamNumber);
 					winningTeam.addToBeaten(lTeamNumber);
 					
-					teamRecords.add(wTeamNumber, winningTeam);
-				} else {
-					//NEED TO ADD WAY TO CHECK IF TEAM HAS ALREADY BEEN BEATEN
-					teamRecords.get(wTeamNumber).addToBeaten(lTeamNumber);	
+					teamRecords.add(winningTeam);	
 				}
 				
 				i++;
@@ -58,6 +69,6 @@ public class Main {
 			e.printStackTrace();
 		}
 			
-		//return teamRecords;
+		return teamRecords;
 	}
 }
