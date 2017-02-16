@@ -6,7 +6,7 @@ import java.util.Objects;
 
 public class Node implements Comparator<Node> {
 	private int teamNumber;
-	private ArrayList<Integer> beaten = new ArrayList<Integer>(); 
+	public ArrayList<Integer> beaten = new ArrayList<Integer>(); 
 
 	public Node(int teamNum)
 	{
