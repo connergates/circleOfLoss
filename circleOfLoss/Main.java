@@ -3,6 +3,7 @@ package circleOfLoss;
 import java.io.File;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class Main {
@@ -13,7 +14,10 @@ public class Main {
 		ArrayList<Node> teamRecords =  new ArrayList<Node>();
 		
 		teamRecords = importTeams();
-		
+		Collections.sort(teamRecords);
+		boolean result = hamPath(teamRecords, new ArrayList<Node>(), 0, 0);
+		System.out.println(result);
+		return;
 	}
 	
 	
@@ -70,5 +74,33 @@ public class Main {
 		}
 			
 		return teamRecords;
+	}
+	
+	private static boolean hamPath(ArrayList<Node> graph, ArrayList<Node> used, int index, int start)
+	{
+		if(index == start && graph.size() == used.size())
+		{
+			return true;
+		}
+		boolean retVal = false;
+		Node spot = graph.get(index);
+		for(Node i : used)
+		{
+			if( i == spot)
+			{
+				return false;
+			}
+		}
+		used.add(spot);
+		for(int i : spot.beaten)
+		{
+			retVal = hamPath(graph, used, i, start);
+			if(retVal)
+			{
+				break;
+			}
+		}
+		used.remove(spot);
+		return false || retVal;
 	}
 }

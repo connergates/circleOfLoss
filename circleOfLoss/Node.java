@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Objects;
 
-public class Node implements Comparator<Node> {
+public class Node implements Comparator<Node>, Comparable<Node>{
 	private int teamNumber;
 	public ArrayList<Integer> beaten = new ArrayList<Integer>(); 
 
@@ -58,5 +58,18 @@ public class Node implements Comparator<Node> {
 	public int hashCode() {
 		
 		return Objects.hash(teamNumber);
+	}
+
+	@Override
+	public int compareTo(Node o) {
+		if(this.getTeamNumber() > o.getTeamNumber())
+		{
+			return 1;
+		}
+		else if(this.getTeamNumber() < o.getTeamNumber())
+		{
+			return -1;
+		}
+		return 0;
 	}
 }
